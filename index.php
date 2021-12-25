@@ -12,9 +12,7 @@
 <?php  
 if (!empty($_POST['text'])) {   
     $text = $_POST['text'];   
-
-    //Додати переноси рядка ("<br>")в текст:
-//Потрібно розбити текст на рядки таким чином, щоб у рядку було не більше 40 символів. Але слова розривати не можна, а треба переносити повністю.
+  
     
     $wordArray = explode(" ", $text);
     foreach ($wordArray as $key => $value) {
@@ -35,12 +33,16 @@ if (!empty($_POST['text'])) {
                  echo $value;
                  echo " ";
                  $strLength = $strLength+1;
+                 if ($strLength==40) {
+                     $strLength = 0;
+                     echo "<br>"; 
+                     
+                 }
                  
              } elseif ($strLength==40) {
                 
                  echo $value;                
-                 echo "<br>";
-                 
+                 echo "<br>";                 
                  
                 $strLength = 0;
              
@@ -54,11 +56,10 @@ if (!empty($_POST['text'])) {
                 $strLength=mb_strlen($wordArray[$key])+1;
                 
              }
-             
-             
+          
     }
 
-    
+   
 }  
 ?>  
   
